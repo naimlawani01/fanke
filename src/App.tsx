@@ -23,14 +23,9 @@ import {
   Twitter,
   Linkedin,
   Download,
-  MessageCircle,
   Send,
   Loader2,
 } from 'lucide-react';
-
-// Numéro WhatsApp (à personnaliser)
-const WHATSAPP_NUMBER = '224620000000';
-const EMAIL_ADDRESS = 'contact@geststock.pro';
 
 // Types de commerces supportés
 const businessTypes = [
@@ -155,11 +150,11 @@ const pricingPlans = [
 const faqs = [
   {
     question: 'Le logiciel fonctionne-t-il sans internet ?',
-    answer: 'Oui ! GestStock Pro fonctionne parfaitement hors-ligne. Toutes vos ventes, stocks et données sont enregistrés localement. Quand internet revient, tout se synchronise automatiquement avec le cloud.',
+    answer: 'Oui ! Fanke fonctionne parfaitement hors-ligne. Toutes vos ventes, stocks et données sont enregistrés localement. Quand internet revient, tout se synchronise automatiquement avec le cloud.',
   },
   {
-    question: 'Puis-je utiliser GestStock Pro pour mon type de commerce ?',
-    answer: 'GestStock Pro est conçu pour tous types de commerces : pharmacies, épiceries, quincailleries, cosmétiques, pièces auto, vêtements, électronique, restaurants et grossistes. Chaque type a ses fonctionnalités adaptées.',
+    question: 'Puis-je utiliser Fanke pour mon type de commerce ?',
+    answer: 'Fanke est conçu pour tous types de commerces : pharmacies, épiceries, quincailleries, cosmétiques, pièces auto, vêtements, électronique, restaurants et grossistes. Chaque type a ses fonctionnalités adaptées.',
   },
   {
     question: 'Comment fonctionne l\'abonnement Cloud Sync ?',
@@ -186,7 +181,7 @@ const testimonials = [
     role: 'Gérant de pharmacie',
     location: 'Conakry, Guinée',
     image: '💊',
-    content: 'Depuis que j\'utilise GestStock Pro, je ne perds plus de temps à chercher mes produits. Les alertes d\'expiration m\'ont fait économiser beaucoup d\'argent.',
+    content: 'Depuis que j\'utilise Fanke, je ne perds plus de temps à chercher mes produits. Les alertes d\'expiration m\'ont fait économiser beaucoup d\'argent.',
     rating: 5,
   },
   {
@@ -238,21 +233,6 @@ function ContactModal({
     setIsSubmitted(true);
   };
 
-  const handleWhatsApp = () => {
-    const message = encodeURIComponent(
-      `Bonjour ! Je suis intéressé(e) par GestStock Pro${planName ? ` (${planName})` : ''}.\n\nNom: ${formData.name || 'Non renseigné'}\nCommerce: ${formData.business || 'Non renseigné'}\nTéléphone: ${formData.phone || 'Non renseigné'}`
-    );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-  };
-
-  const handleEmail = () => {
-    const subject = encodeURIComponent(`Demande d'information - GestStock Pro${planName ? ` (${planName})` : ''}`);
-    const body = encodeURIComponent(
-      `Bonjour,\n\nJe suis intéressé(e) par GestStock Pro.\n\nNom: ${formData.name}\nCommerce: ${formData.business}\nTéléphone: ${formData.phone}\n\nMessage: ${formData.message}\n\nCordialement`
-    );
-    window.open(`mailto:${EMAIL_ADDRESS}?subject=${subject}&body=${body}`, '_blank');
-  };
-
   if (!isOpen) return null;
 
   return (
@@ -297,33 +277,6 @@ function ContactModal({
             </div>
           ) : (
             <>
-              {/* Boutons rapides */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <button
-                  onClick={handleWhatsApp}
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition-colors"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  WhatsApp
-                </button>
-                <button
-                  onClick={handleEmail}
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                  Email
-                </button>
-              </div>
-
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-white text-gray-500">ou remplissez le formulaire</span>
-                </div>
-              </div>
-
               {/* Formulaire */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -456,7 +409,7 @@ function App() {
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-lg">G</span>
               </div>
-              <span className="font-bold text-xl text-gray-900">GestStock<span className="text-indigo-600">Pro</span></span>
+              <span className="font-bold text-xl text-gray-900">Fanke</span>
             </div>
 
             {/* Desktop Menu */}
@@ -897,7 +850,7 @@ function App() {
               Prêt à transformer votre commerce ?
             </h2>
             <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
-              Rejoignez des milliers de commerçants qui font confiance à GestStock Pro pour gérer leur activité.
+              Rejoignez des milliers de commerçants qui font confiance à Fanke pour gérer leur activité.
             </p>
 <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
@@ -929,7 +882,7 @@ function App() {
                 <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
                   <span className="text-white font-bold text-lg">G</span>
                 </div>
-                <span className="font-bold text-xl text-white">GestStock<span className="text-indigo-400">Pro</span></span>
+                <span className="font-bold text-xl text-white">Fanke</span>
               </div>
               <p className="text-gray-400 mb-6 max-w-md">
                 Le logiciel de gestion de stock n°1 pour les commerces africains. Simple, puissant, et qui fonctionne même sans internet.
@@ -943,8 +896,8 @@ function App() {
                 </a>
                 <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
                   <Linkedin className="w-5 h-5" />
-                </a>
-              </div>
+        </a>
+      </div>
             </div>
 
             {/* Links */}
@@ -981,7 +934,7 @@ function App() {
           {/* Bottom */}
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm">
-              © 2024 GestStock Pro. Tous droits réservés.
+              © 2024 Fanke. Tous droits réservés.
             </p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-gray-500 hover:text-indigo-400 transition-colors">Politique de confidentialité</a>
