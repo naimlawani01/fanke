@@ -236,41 +236,41 @@ function ContactModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        initial={{ opacity: 0, y: 100, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 100, scale: 0.95 }}
+        className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-lg max-h-[85vh] sm:max-h-[90vh] overflow-y-auto"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 p-6 rounded-t-3xl">
+        <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 p-4 sm:p-6 rounded-t-2xl sm:rounded-t-2xl">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
+            className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 text-white/80 hover:text-white transition-colors"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-xl sm:text-2xl font-bold text-white pr-8">
             {planName ? `Commander ${planName}` : 'Contactez-nous'}
           </h2>
-          <p className="text-indigo-100 mt-1">
+          <p className="text-indigo-100 mt-1 text-sm sm:text-base">
             Nous vous répondons sous 24h
           </p>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {isSubmitted ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="w-8 h-8 text-green-600" />
+            <div className="text-center py-6 sm:py-8">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Message envoyé !</h3>
-              <p className="text-gray-600 mb-6">Nous vous contacterons très bientôt.</p>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Message envoyé !</h3>
+              <p className="text-gray-600 mb-6 text-sm sm:text-base">Nous vous contacterons très bientôt.</p>
               <button
                 onClick={onClose}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors text-sm sm:text-base"
               >
                 Fermer
               </button>
@@ -278,9 +278,9 @@ function ContactModal({
           ) : (
             <>
               {/* Formulaire */}
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Votre nom *
                   </label>
                   <input
@@ -288,13 +288,13 @@ function ContactModal({
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm sm:text-base"
                     placeholder="Ex: Mamadou Diallo"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Téléphone *
                   </label>
                   <input
@@ -302,33 +302,33 @@ function ContactModal({
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm sm:text-base"
                     placeholder="Ex: +224 620 00 00 00"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm sm:text-base"
                     placeholder="Ex: contact@moncommerce.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Type de commerce *
                   </label>
                   <select
                     required
                     value={formData.business}
                     onChange={(e) => setFormData({ ...formData, business: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm sm:text-base"
                   >
                     <option value="">Sélectionnez...</option>
                     <option value="Pharmacie">💊 Pharmacie</option>
@@ -345,14 +345,14 @@ function ContactModal({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Message (optionnel)
                   </label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none text-sm sm:text-base"
                     placeholder="Décrivez vos besoins..."
                   />
                 </div>
@@ -360,23 +360,23 @@ function ContactModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                  className="w-full py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg sm:rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-70 flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
                       Envoi en cours...
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5" />
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                       Envoyer ma demande
                     </>
                   )}
                 </button>
               </form>
 
-              <p className="text-xs text-gray-500 text-center mt-4">
+              <p className="text-xs text-gray-500 text-center mt-3 sm:mt-4">
                 En soumettant ce formulaire, vous acceptez d'être contacté par notre équipe.
               </p>
             </>
@@ -407,7 +407,7 @@ function App() {
             {/* Logo */}
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">G</span>
+                <span className="text-white font-bold text-lg">F</span>
               </div>
               <span className="font-bold text-xl text-gray-900">Fanke</span>
             </div>
@@ -465,49 +465,49 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-purple-50" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+        <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
+        <div className="absolute top-40 right-10 w-48 sm:w-72 h-48 sm:h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute bottom-20 left-1/2 w-48 sm:w-72 h-48 sm:h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 rounded-full text-indigo-700 text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-100 rounded-full text-indigo-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-indigo-500 rounded-full animate-pulse" />
                 Nouveau : Mode hors-ligne amélioré
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4 sm:mb-6">
                 Gérez votre commerce{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
                   simplement
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
                 Le logiciel de gestion de stock pensé pour l'Afrique. 
                 Fonctionne même sans internet. Simple à utiliser, puissant pour votre business.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10">
                 <button 
                   onClick={() => openContactWithPlan('Licence')}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold text-base sm:text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all hover:scale-105"
                 >
                   <Download className="w-5 h-5" />
                   Acheter maintenant
                 </button>
                 <a 
                   href="#features"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-700 rounded-full font-semibold text-lg border-2 border-gray-200 hover:border-indigo-300 hover:text-indigo-600 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-700 rounded-full font-semibold text-base sm:text-lg border-2 border-gray-200 hover:border-indigo-300 hover:text-indigo-600 transition-all"
                 >
                   <Play className="w-5 h-5" />
                   Découvrir
@@ -515,18 +515,18 @@ function App() {
               </div>
 
               {/* Trust badges */}
-              <div className="flex items-center gap-6 text-sm text-gray-500">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
                 <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-green-500" />
-                  Installation en 2 min
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                  <span>Installation en 2 min</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-green-500" />
-                  Fonctionne hors-ligne
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                  <span>Fonctionne hors-ligne</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-green-500" />
-                  Support 7j/7
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                  <span>Support 7j/7</span>
                 </div>
               </div>
             </motion.div>
@@ -536,62 +536,62 @@ function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+              className="relative hidden sm:block"
             >
-              <div className="relative bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-6 shadow-2xl">
+              <div className="relative bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl">
                 {/* Mockup header */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-400" />
                 </div>
                 
                 {/* App screenshot placeholder */}
-                <div className="bg-white rounded-xl overflow-hidden shadow-inner">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-4 text-white">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
+                <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-inner">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-3 sm:p-4 text-white">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl">
                         🏪
                       </div>
                       <div>
-                        <h3 className="font-bold">Ma Boutique</h3>
-                        <p className="text-sm text-white/80">Épicerie • Conakry</p>
+                        <h3 className="font-bold text-sm sm:text-base">Ma Boutique</h3>
+                        <p className="text-xs sm:text-sm text-white/80">Épicerie • Conakry</p>
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                  <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
+                    <div className="flex justify-between items-center p-2 sm:p-3 bg-green-50 rounded-lg">
                       <div>
-                        <p className="text-sm text-gray-500">Ventes du jour</p>
-                        <p className="text-xl font-bold text-gray-900">2 450 000 GNF</p>
+                        <p className="text-xs sm:text-sm text-gray-500">Ventes du jour</p>
+                        <p className="text-base sm:text-xl font-bold text-gray-900">2 450 000 GNF</p>
                       </div>
-                      <TrendingUp className="w-8 h-8 text-green-500" />
+                      <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-500" />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 bg-blue-50 rounded-lg">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                      <div className="p-2 sm:p-3 bg-blue-50 rounded-lg">
                         <p className="text-xs text-gray-500">Produits</p>
-                        <p className="text-lg font-bold text-gray-900">234</p>
+                        <p className="text-base sm:text-lg font-bold text-gray-900">234</p>
                       </div>
-                      <div className="p-3 bg-purple-50 rounded-lg">
+                      <div className="p-2 sm:p-3 bg-purple-50 rounded-lg">
                         <p className="text-xs text-gray-500">Clients</p>
-                        <p className="text-lg font-bold text-gray-900">89</p>
+                        <p className="text-base sm:text-lg font-bold text-gray-900">89</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Floating badges */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl">
+              {/* Floating badges - hidden on small screens */}
+              <div className="hidden md:block absolute -top-4 -right-4 bg-white rounded-2xl p-3 sm:p-4 shadow-xl">
                 <div className="flex items-center gap-2">
-                  <Cloud className="w-5 h-5 text-indigo-500" />
-                  <span className="text-sm font-medium text-gray-700">Sync cloud</span>
+                  <Cloud className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-500" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-700">Sync cloud</span>
                 </div>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl">
+              <div className="hidden md:block absolute -bottom-4 -left-4 bg-white rounded-2xl p-3 sm:p-4 shadow-xl">
                 <div className="flex items-center gap-2">
-                  <WifiOff className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium text-gray-700">Mode hors-ligne</span>
+                  <WifiOff className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
+                  <span className="text-xs sm:text-sm font-medium text-gray-700">Mode hors-ligne</span>
                 </div>
               </div>
             </motion.div>
@@ -600,12 +600,12 @@ function App() {
       </section>
 
       {/* Business Types */}
-      <section className="py-16 bg-white">
+      <section className="py-10 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <p className="text-gray-500 text-lg">Adapté à tous les types de commerces</p>
+          <div className="text-center mb-6 sm:mb-10">
+            <p className="text-gray-500 text-base sm:text-lg">Adapté à tous les types de commerces</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {businessTypes.map((type, index) => (
               <motion.div
                 key={type.name}
@@ -613,10 +613,10 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-2 px-5 py-3 bg-gray-50 hover:bg-indigo-50 rounded-full transition-colors cursor-default"
+                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-gray-50 hover:bg-indigo-50 rounded-full transition-colors cursor-default"
               >
-                <span className="text-2xl">{type.icon}</span>
-                <span className="font-medium text-gray-700">{type.name}</span>
+                <span className="text-lg sm:text-2xl">{type.icon}</span>
+                <span className="font-medium text-gray-700 text-sm sm:text-base">{type.name}</span>
               </motion.div>
             ))}
           </div>
@@ -624,23 +624,23 @@ function App() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section id="features" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Tout ce dont vous avez besoin
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Des fonctionnalités puissantes pour gérer votre commerce efficacement
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -648,13 +648,13 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100 group"
+                className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100 group"
               >
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${feature.bgColor} group-hover:scale-110 transition-transform`}>
-                  <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
+                <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-6 ${feature.bgColor} group-hover:scale-110 transition-transform`}>
+                  <feature.icon className={`w-5 h-5 sm:w-7 sm:h-7 ${feature.iconColor}`} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -662,23 +662,23 @@ function App() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-gray-50">
+      <section id="pricing" className="py-16 sm:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Tarifs simples et transparents
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Choisissez la formule qui correspond à vos besoins
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid gap-6 sm:gap-8 max-w-5xl mx-auto md:grid-cols-3">
             {pricingPlans.map((plan, index) => (
               <motion.div
                 key={plan.name}
@@ -686,38 +686,38 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative bg-white rounded-3xl p-8 shadow-lg ${
-                  plan.popular ? 'ring-2 ring-indigo-500 scale-105' : ''
+                className={`relative bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg ${
+                  plan.popular ? 'ring-2 ring-indigo-500 md:scale-105' : ''
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm font-semibold rounded-full">
+                  <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs sm:text-sm font-semibold rounded-full whitespace-nowrap">
                     Populaire
                   </div>
                 )}
                 
-                <div className="text-center mb-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
-                  <p className="text-gray-500 text-sm">{plan.subtitle}</p>
-                  <div className="mt-4">
-                    <span className="text-4xl font-extrabold text-gray-900">{plan.price}</span>
-                    <span className="text-gray-500 ml-1">{plan.currency} {plan.period}</span>
+                <div className="text-center mb-6 sm:mb-8">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                  <p className="text-gray-500 text-xs sm:text-sm">{plan.subtitle}</p>
+                  <div className="mt-3 sm:mt-4">
+                    <span className="text-3xl sm:text-4xl font-extrabold text-gray-900">{plan.price}</span>
+                    <span className="text-gray-500 ml-1 text-sm sm:text-base">{plan.currency} {plan.period}</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">{plan.description}</p>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-2">{plan.description}</p>
                 </div>
 
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">{feature}</span>
+                    <li key={feature} className="flex items-start gap-2 sm:gap-3">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-600 text-sm sm:text-base">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <button
                   onClick={() => openContactWithPlan(plan.name)}
-                  className={`w-full py-3 rounded-xl font-semibold transition-all ${
+                  className={`w-full py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all text-sm sm:text-base ${
                     plan.popular
                       ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-500/30'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -732,23 +732,23 @@ function App() {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-24 bg-white">
+      <section id="testimonials" className="py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Ce que disent nos clients
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Des milliers de commerçants nous font déjà confiance
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.name}
@@ -756,21 +756,21 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 rounded-2xl p-8"
+                className="bg-gray-50 rounded-xl sm:rounded-2xl p-5 sm:p-8"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-3 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center text-2xl">
+                <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">"{testimonial.content}"</p>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
                     {testimonial.image}
                   </div>
-      <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate">{testimonial.role}</p>
                     <p className="text-xs text-gray-400">{testimonial.location}</p>
                   </div>
                 </div>
@@ -781,23 +781,23 @@ function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 bg-gray-50">
+      <section id="faq" className="py-16 sm:py-24 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Questions fréquentes
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-base sm:text-xl text-gray-600">
               Trouvez rapidement les réponses à vos questions
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
@@ -805,17 +805,17 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl overflow-hidden shadow-sm"
+                className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-sm"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left"
+                  className="w-full px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between text-left gap-4"
                 >
-                  <span className="font-semibold text-gray-900">{faq.question}</span>
+                  <span className="font-semibold text-gray-900 text-sm sm:text-base">{faq.question}</span>
                   {openFaq === index ? (
-                    <ChevronUp className="w-5 h-5 text-gray-400" />
+                    <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                    <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
                   )}
                 </button>
                 <AnimatePresence>
@@ -826,7 +826,7 @@ function App() {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-5 text-gray-600">
+                      <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 text-sm sm:text-base">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -839,30 +839,30 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-indigo-600 to-purple-700">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-indigo-600 to-purple-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
               Prêt à transformer votre commerce ?
             </h2>
-            <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-indigo-100 mb-8 sm:mb-10 max-w-2xl mx-auto px-2">
               Rejoignez des milliers de commerçants qui font confiance à Fanke pour gérer leur activité.
             </p>
-<div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
               <button 
                 onClick={() => openContactWithPlan('Licence')}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-600 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-indigo-600 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition-all hover:scale-105"
               >
                 <Download className="w-5 h-5" />
                 Acheter maintenant
               </button>
               <button 
                 onClick={() => openContactWithPlan()}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/10 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-white rounded-full font-semibold text-base sm:text-lg border-2 border-white/30 hover:bg-white/10 transition-all"
               >
                 Nous contacter
                 <ArrowRight className="w-5 h-5" />
@@ -873,37 +873,37 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-gray-900 text-gray-300 py-16">
+      <footer id="contact" className="bg-gray-900 text-gray-300 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
             {/* Logo & Description */}
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">G</span>
+            <div className="col-span-2">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-base sm:text-lg">F</span>
                 </div>
-                <span className="font-bold text-xl text-white">Fanke</span>
+                <span className="font-bold text-lg sm:text-xl text-white">Fanke</span>
               </div>
-              <p className="text-gray-400 mb-6 max-w-md">
+              <p className="text-gray-400 mb-4 sm:mb-6 max-w-md text-sm sm:text-base">
                 Le logiciel de gestion de stock n°1 pour les commerces africains. Simple, puissant, et qui fonctionne même sans internet.
               </p>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
-                  <Facebook className="w-5 h-5" />
+              <div className="flex gap-3 sm:gap-4">
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
+                  <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
-                  <Twitter className="w-5 h-5" />
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
+                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
-                  <Linkedin className="w-5 h-5" />
-        </a>
-      </div>
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
+                </a>
+              </div>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-semibold text-white mb-4">Produit</h4>
-              <ul className="space-y-3">
+              <h4 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Produit</h4>
+              <ul className="space-y-2 sm:space-y-3 text-sm">
                 <li><a href="#features" className="hover:text-indigo-400 transition-colors">Fonctionnalités</a></li>
                 <li><a href="#pricing" className="hover:text-indigo-400 transition-colors">Tarifs</a></li>
                 <li><a href="#" className="hover:text-indigo-400 transition-colors">Télécharger</a></li>
@@ -913,30 +913,30 @@ function App() {
 
             {/* Contact */}
             <div>
-              <h4 className="font-semibold text-white mb-4">Contact</h4>
-              <ul className="space-y-3">
+              <h4 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Contact</h4>
+              <ul className="space-y-2 sm:space-y-3 text-sm">
                 <li className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-indigo-400" />
-                  contact@geststock.pro
+                  <Mail className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                  <span className="truncate">contact@fanke.app</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-indigo-400" />
-                  +224 620 00 00 00
+                  <Phone className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                  <span>+224 620 00 00 00</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-indigo-400" />
-                  Conakry, Guinée
+                  <MapPin className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                  <span>Conakry, Guinée</span>
                 </li>
               </ul>
             </div>
-      </div>
+          </div>
 
           {/* Bottom */}
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
+          <div className="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+            <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
               © 2024 Fanke. Tous droits réservés.
             </p>
-            <div className="flex gap-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
               <a href="#" className="text-gray-500 hover:text-indigo-400 transition-colors">Politique de confidentialité</a>
               <a href="#" className="text-gray-500 hover:text-indigo-400 transition-colors">Conditions d'utilisation</a>
             </div>
