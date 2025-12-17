@@ -10,10 +10,6 @@ import {
   Cloud,
   WifiOff,
   Shield,
-  BarChart3,
-  CreditCard,
-  Bell,
-  Smartphone,
   Check,
   ChevronDown,
   ChevronUp,
@@ -27,7 +23,14 @@ import {
   Twitter,
   Linkedin,
   Download,
+  MessageCircle,
+  Send,
+  Loader2,
 } from 'lucide-react';
+
+// Numéro WhatsApp (à personnaliser)
+const WHATSAPP_NUMBER = '224620000000';
+const EMAIL_ADDRESS = 'contact@geststock.pro';
 
 // Types de commerces supportés
 const businessTypes = [
@@ -204,9 +207,243 @@ const testimonials = [
   },
 ];
 
+// Modal de contact/achat
+function ContactModal({ 
+  isOpen, 
+  onClose, 
+  planName 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  planName?: string;
+}) {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    business: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simuler l'envoi
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent(
+      `Bonjour ! Je suis intéressé(e) par GestStock Pro${planName ? ` (${planName})` : ''}.\n\nNom: ${formData.name || 'Non renseigné'}\nCommerce: ${formData.business || 'Non renseigné'}\nTéléphone: ${formData.phone || 'Non renseigné'}`
+    );
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+  };
+
+  const handleEmail = () => {
+    const subject = encodeURIComponent(`Demande d'information - GestStock Pro${planName ? ` (${planName})` : ''}`);
+    const body = encodeURIComponent(
+      `Bonjour,\n\nJe suis intéressé(e) par GestStock Pro.\n\nNom: ${formData.name}\nCommerce: ${formData.business}\nTéléphone: ${formData.phone}\n\nMessage: ${formData.message}\n\nCordialement`
+    );
+    window.open(`mailto:${EMAIL_ADDRESS}?subject=${subject}&body=${body}`, '_blank');
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 p-6 rounded-t-3xl">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <h2 className="text-2xl font-bold text-white">
+            {planName ? `Commander ${planName}` : 'Contactez-nous'}
+          </h2>
+          <p className="text-indigo-100 mt-1">
+            Nous vous répondons sous 24h
+          </p>
+        </div>
+
+        <div className="p-6">
+          {isSubmitted ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Message envoyé !</h3>
+              <p className="text-gray-600 mb-6">Nous vous contacterons très bientôt.</p>
+              <button
+                onClick={onClose}
+                className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
+              >
+                Fermer
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* Boutons rapides */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <button
+                  onClick={handleWhatsApp}
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  WhatsApp
+                </button>
+                <button
+                  onClick={handleEmail}
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-colors"
+                >
+                  <Mail className="w-5 h-5" />
+                  Email
+                </button>
+              </div>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-white text-gray-500">ou remplissez le formulaire</span>
+                </div>
+              </div>
+
+              {/* Formulaire */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Votre nom *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    placeholder="Ex: Mamadou Diallo"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    placeholder="Ex: +224 620 00 00 00"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    placeholder="Ex: contact@moncommerce.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Type de commerce *
+                  </label>
+                  <select
+                    required
+                    value={formData.business}
+                    onChange={(e) => setFormData({ ...formData, business: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                  >
+                    <option value="">Sélectionnez...</option>
+                    <option value="Pharmacie">💊 Pharmacie</option>
+                    <option value="Épicerie">🛒 Épicerie</option>
+                    <option value="Quincaillerie">🔧 Quincaillerie</option>
+                    <option value="Cosmétiques">💄 Cosmétiques</option>
+                    <option value="Pièces auto">🚗 Pièces auto</option>
+                    <option value="Vêtements">👕 Vêtements</option>
+                    <option value="Électronique">📱 Électronique</option>
+                    <option value="Restaurant">🍽️ Restaurant</option>
+                    <option value="Grossiste">📦 Grossiste</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Message (optionnel)
+                  </label>
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={3}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
+                    placeholder="Décrivez vos besoins..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Envoyer ma demande
+                    </>
+                  )}
+                </button>
+              </form>
+
+              <p className="text-xs text-gray-500 text-center mt-4">
+                En soumettant ce formulaire, vous acceptez d'être contacté par notre équipe.
+              </p>
+            </>
+          )}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | undefined>();
+
+  const openContactWithPlan = (planName?: string) => {
+    setSelectedPlan(planName);
+    setShowContactModal(true);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -235,12 +472,12 @@ function App() {
               <a href="#contact" className="px-4 py-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors">
                 Contact
               </a>
-              <a 
-                href="#pricing" 
+              <button 
+                onClick={() => openContactWithPlan()}
                 className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all hover:scale-105"
               >
                 Commencer
-              </a>
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -267,7 +504,7 @@ function App() {
                 <a href="#pricing" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">Tarifs</a>
                 <a href="#testimonials" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">Témoignages</a>
                 <a href="#faq" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">FAQ</a>
-                <a href="#pricing" className="block px-4 py-3 bg-indigo-600 text-white text-center rounded-lg font-semibold">Commencer</a>
+                <button onClick={() => { setMobileMenuOpen(false); openContactWithPlan(); }} className="block w-full px-4 py-3 bg-indigo-600 text-white text-center rounded-lg font-semibold">Commencer</button>
               </div>
             </motion.div>
           )}
@@ -308,19 +545,19 @@ function App() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <a 
-                  href="#pricing"
+                <button 
+                  onClick={() => openContactWithPlan('Licence')}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all hover:scale-105"
                 >
                   <Download className="w-5 h-5" />
-                  Télécharger maintenant
-                </a>
+                  Acheter maintenant
+                </button>
                 <a 
-                  href="#demo"
+                  href="#features"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-700 rounded-full font-semibold text-lg border-2 border-gray-200 hover:border-indigo-300 hover:text-indigo-600 transition-all"
                 >
                   <Play className="w-5 h-5" />
-                  Voir la démo
+                  Découvrir
                 </a>
               </div>
 
@@ -525,16 +762,16 @@ function App() {
                   ))}
                 </ul>
 
-                <a
-                  href={plan.name === 'Entreprise' ? '#contact' : '#pricing'}
-                  className={`block w-full py-3 rounded-xl font-semibold transition-all text-center ${
+                <button
+                  onClick={() => openContactWithPlan(plan.name)}
+                  className={`w-full py-3 rounded-xl font-semibold transition-all ${
                     plan.popular
                       ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-500/30'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
                   {plan.cta}
-                </a>
+                </button>
               </motion.div>
             ))}
           </div>
@@ -662,22 +899,22 @@ function App() {
             <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
               Rejoignez des milliers de commerçants qui font confiance à GestStock Pro pour gérer leur activité.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="#pricing"
+<div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={() => openContactWithPlan('Licence')}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-600 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover:scale-105"
               >
                 <Download className="w-5 h-5" />
                 Acheter maintenant
-              </a>
-              <a 
-                href="#contact"
+              </button>
+              <button 
+                onClick={() => openContactWithPlan()}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white rounded-full font-semibold text-lg border-2 border-white/30 hover:bg-white/10 transition-all"
               >
                 Nous contacter
                 <ArrowRight className="w-5 h-5" />
-        </a>
-      </div>
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -753,6 +990,20 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {showContactModal && (
+          <ContactModal
+            isOpen={showContactModal}
+            onClose={() => {
+              setShowContactModal(false);
+              setSelectedPlan(undefined);
+            }}
+            planName={selectedPlan}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
