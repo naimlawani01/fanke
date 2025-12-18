@@ -91,7 +91,7 @@ const pricingPlans = [
   {
     name: 'Licence',
     subtitle: 'Achat unique',
-    price: '150 000',
+    price: '73 600',
     currency: 'GNF',
     period: 'une seule fois',
     description: 'Achetez le logiciel et utilisez-le pour toujours',
@@ -493,7 +493,7 @@ function App() {
               </h1>
               
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-                Le logiciel de gestion de stock pensé pour l'Afrique. 
+                Le logiciel de gestion de stock simple et efficace. 
                 Fonctionne même sans internet. Simple à utiliser, puissant pour votre business.
               </p>
 
@@ -511,8 +511,8 @@ function App() {
                 >
                   <Play className="w-5 h-5" />
                   Découvrir
-                </a>
-              </div>
+        </a>
+      </div>
 
               {/* Trust badges */}
               <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
@@ -866,7 +866,7 @@ function App() {
               >
                 Nous contacter
                 <ArrowRight className="w-5 h-5" />
-              </button>
+        </button>
             </div>
           </motion.div>
         </div>
@@ -885,7 +885,7 @@ function App() {
                 <span className="font-bold text-lg sm:text-xl text-white">Fanke</span>
               </div>
               <p className="text-gray-400 mb-4 sm:mb-6 max-w-md text-sm sm:text-base">
-                Le logiciel de gestion de stock n°1 pour les commerces africains. Simple, puissant, et qui fonctionne même sans internet.
+                Le logiciel de gestion de stock pour les commerçants. Simple, puissant, et qui fonctionne même sans internet.
               </p>
               <div className="flex gap-3 sm:gap-4">
                 <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-800 hover:bg-indigo-600 rounded-lg flex items-center justify-center transition-colors">
@@ -929,7 +929,7 @@ function App() {
                 </li>
               </ul>
             </div>
-          </div>
+      </div>
 
           {/* Bottom */}
           <div className="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
