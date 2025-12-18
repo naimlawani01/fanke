@@ -91,7 +91,7 @@ const pricingPlans = [
   {
     name: 'Licence',
     subtitle: 'Achat unique',
-    price: '73 600',
+    price: '736 000',
     currency: 'GNF',
     period: 'une seule fois',
     description: 'Achetez le logiciel et utilisez-le pour toujours',
