@@ -406,8 +406,24 @@ function App() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">F</span>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
+                  <defs>
+                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{stopColor:"#6366F1",stopOpacity:1}} />
+                      <stop offset="100%" style={{stopColor:"#8B5CF6",stopOpacity:1}} />
+                    </linearGradient>
+                  </defs>
+                  <rect width="100" height="100" rx="22" fill="url(#logoGrad)"/>
+                  <path 
+                    d="M 30 25 L 30 75 L 70 75 L 70 60 L 50 60 L 50 50 L 65 50 L 65 35 L 50 35 L 50 25 Z" 
+                    fill="white" 
+                    stroke="white" 
+                    strokeWidth="2" 
+                    strokeLinejoin="round" 
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
               <span className="font-bold text-xl text-gray-900">Fanke</span>
             </div>
@@ -879,8 +895,24 @@ function App() {
             {/* Logo & Description */}
             <div className="col-span-2">
               <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-base sm:text-lg">F</span>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center overflow-hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{stopColor:"#6366F1",stopOpacity:1}} />
+                        <stop offset="100%" style={{stopColor:"#8B5CF6",stopOpacity:1}} />
+                      </linearGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="22" fill="url(#footerLogoGrad)"/>
+                    <path 
+                      d="M 30 25 L 30 75 L 70 75 L 70 60 L 50 60 L 50 50 L 65 50 L 65 35 L 50 35 L 50 25 Z" 
+                      fill="white" 
+                      stroke="white" 
+                      strokeWidth="2" 
+                      strokeLinejoin="round" 
+                      strokeLinecap="round"
+                    />
+                  </svg>
                 </div>
                 <span className="font-bold text-lg sm:text-xl text-white">Fanke</span>
               </div>
